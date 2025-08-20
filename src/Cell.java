@@ -1,15 +1,18 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 
-public class Cell {
+public class Cell extends Rectangle {
   // fields
   int x;
   int y;
-  static int size = 35;
+  static int height = 35;
+  static int width = 35;
 
   // constructors
   public Cell(int inX, int inY) {
+    super(inX, inY, width, height);
     x = inX;
     y = inY;
   }
@@ -21,14 +24,14 @@ public class Cell {
     } else {
       g.setColor(Color.WHITE);
     }
-    g.fillRect(x, y, size, size);
+    g.fillRect(x, y, width, height);
     g.setColor(Color.BLACK);
-    g.drawRect(x, y, size, size);
+    g.drawRect(x, y, width, height);
   }
 
   public boolean contains(Point p) {
     if(p != null) {
-      return x < p.x && x+size > p.x && y < p.y && y+size > p.y;
+    return super.contains(p.getX(), p.getY());
     } else {
       return false;
     }
