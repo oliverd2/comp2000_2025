@@ -1,5 +1,6 @@
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,16 +16,18 @@ public class Main extends JFrame {
         setPreferredSize(new Dimension(720, 720));
       }
 
+      Grid newGrid = new Grid(10, 10, 20);
+
+
       @Override
       public void paint(Graphics g) {
-        g.setColor(java.awt.Color.BLACK);
-        g.drawRect(10, 10, 700, 700);
-        
-        for (int i = 10; i < 720; i+= 35) {
-          g.drawLine(i, 10, i, 710);
-          g.drawLine(10, i, 710, i);
+        Point mousePos = getMousePosition();
+        if (mousePos == null) {
+          mousePos = new Point();
         }
+        newGrid.paintGrid(g, mousePos);
       }
+      
     }
 
     private Main() {
